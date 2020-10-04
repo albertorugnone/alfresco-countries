@@ -1,0 +1,22 @@
+dist: focal
+sudo: required
+language: java
+jdk:
+  - openjdk11
+
+services:
+  - docker
+
+cache:
+  directories:
+    - $HOME/.m2
+
+branches:
+  only:
+    - main
+
+stages:
+  - test
+  - release
+
+install: travis_retry mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
